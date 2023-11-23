@@ -114,7 +114,7 @@ const LoginPage = () => {
         </Button>
         <span className="self-container">
           Dont have an account?{" "}
-          <Link href="/signup" className="text-primary">
+          <Link href="/signup" className="text-primary ml-4">
             Sign Up
           </Link>
         </span>

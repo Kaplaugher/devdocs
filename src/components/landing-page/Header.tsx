@@ -213,7 +213,7 @@ const Header = () => {
           </Button>
         </Link>
         <Link href="/signup">
-          <Button variant="default" className="whitespace-nowrap">
+          <Button variant="btn-primary" className="whitespace-nowrap">
             Sign Up
           </Button>
         </Link>
