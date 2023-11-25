@@ -9,13 +9,14 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getSession();
   if (req.nextUrl.pathname.startsWith("/dashboard")) {
     if (!session) {
+      console.log("no session");
       return NextResponse.redirect(new URL("/login", req.url));
     }
   }
-  const emailListError =
-    "Email link is invalid or expired. Please request a new one.";
+
+  const emailLinkError = "Email link is invalid or has expired";
   if (
-    req.nextUrl.searchParams.get("error_description") === emailListError &&
+    req.nextUrl.searchParams.get("error_description") === emailLinkError &&
     req.nextUrl.pathname !== "/signup"
   ) {
     return NextResponse.redirect(
