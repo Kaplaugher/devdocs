@@ -6,7 +6,7 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, params }) => {
-  return <main className="flex overflow-hidden h-screen">Layout</main>;
+  return <main className="flex overflow-hidden h-screen">{children}</main>;
 };
 
 export default Layout;
