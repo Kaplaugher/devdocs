@@ -1,5 +1,6 @@
+"use client";
 import { AuthUser } from "@supabase/supabase-js";
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -11,13 +12,18 @@ import { Label } from "@radix-ui/react-label";
 import { Loader } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import EmojiPicker from "../global/EmojiPicker";
 
 interface DashboardSetupProps {
   user: AuthUser;
   subscription: {} | null;
 }
 
-const DashboardSetup: React.FC<DashboardSetupProps> = () => {
+const DashboardSetup: React.FC<DashboardSetupProps> = ({
+  user,
+  subscription,
+}) => {
+  const [selectedEmoji, setSelectedEmoji] = useState("");
   return (
     <Card
       className="w-[800px]
@@ -33,7 +39,9 @@ const DashboardSetup: React.FC<DashboardSetupProps> = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div>hi</div>
+        <EmojiPicker getValue={(emoji) => setSelectedEmoji(emoji)}>
+          {selectedEmoji}
+        </EmojiPicker>
       </CardContent>
     </Card>
   );

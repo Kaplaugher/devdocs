@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 
 import DashboardSetup from "@/components/dashboard-setup/DashboardSetup";
 import db from "@/lib/supabase/db";
+import { getUserSubscriptionStatus } from "@/lib/supabase/queries";
 
 const DashboardPage = async () => {
   const supabase = createServerComponentClient({ cookies });
@@ -14,7 +15,12 @@ const DashboardPage = async () => {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const { data: subscription, error: subscriptionError } =
+    await getUserSubscriptionStatus(user.id);
+
   if (!user) return;
+
+  if (subscriptionError) return;
 
   const workspace = await db.query.workspaces.findFirst({
     where: (workspace, { eq }) => eq(workspace.workspaceOwner, user.id),
@@ -31,7 +37,7 @@ const DashboardPage = async () => {
         items-center
   "
       >
-        <DashboardSetup />
+        <DashboardSetup user={user} subscription={subscription} />
       </div>
     );
 
